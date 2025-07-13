@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyCroquis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div id="forms">
+      <div>size: <input id="sizeInput" value="5" /></div>
+      <div>interval: <input id="intervalInput" value="120" /></div>
+      <button id="startButton">start</button>
+    </div>
+
+    <div id="meta">
+      <div id="counter"></div>
+      <div id="timer"></div>
+    </div>
+    <div id="message"></div>
+    <div id="viewer"></div>
+  </body>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</html>

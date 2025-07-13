@@ -1,0 +1,9 @@
+# vscode
+/.vscode
+
+# python
+/venv
+__pycache__
+
+# mycroquis
+/mycroquis/static/img
