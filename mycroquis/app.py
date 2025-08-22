@@ -1,13 +1,13 @@
 import os
 import random
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
 CROQUIS_DIR = "./mycroquis/static/img"
-CROQUIS_LEN = 10
-CROQUIS_INTERVAL_SECONDS = 120
+CROQUIS_LEN = 5
+CROQUIS_INTERVAL_SECONDS = 180
 
 
 @app.route("/")
