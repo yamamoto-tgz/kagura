@@ -1,92 +1,70 @@
-class Timer {
-  constructor(startTime) {
-    this.root = document.querySelector("#timer");
-    this.startTime = startTime;
-  }
-  start() {
-    let time = this.startTime;
-    this.interval = setInterval(() => {
-      this.root.textContent = time;
-      time -= 1;
-      if (time < 0) {
-        clearInterval(this.interval);
-        document.dispatchEvent(new Event("timeup"));
-        this.root.textContent = "";
-      }
-    }, 1000);
-  }
-}
-
-class Viewer {
-  constructor(size) {
-    this.size = size;
-    this.root = document.querySelector("#viewer");
-    this.images = [];
-  }
-  async load() {
-    const res = await fetch(`/api/images?size=${this.size}`);
+async function loadImages(size, folder) {
+    const res = await fetch(`/api/images?size=${size}&folder=${folder}`);
     const paths = await res.json();
-    paths.forEach((path) => this.addImage(path));
-  }
 
-  addImage(path) {
-    const img = document.createElement("img");
-    img.src = `/static/${path}`;
-    img.classList.add("invisible");
-
-    this.images.push(img);
-    this.root.appendChild(img);
-  }
-
-  switch(index) {
-    for (let i = 0; i < this.images.length; i++) {
-      if (i == index) {
-        this.images[i].classList.remove("invisible");
-      } else {
-        this.images[i].classList.add("invisible");
-      }
+    for (let i = 0; i < paths.length; i++) {
+        const img = document.createElement("img");
+        img.id = i;
+        img.src = paths[i];
+        img.style = "display:none";
+        document.body.appendChild(img);
     }
-  }
-
-  showAll() {
-    this.images.forEach((img) => img.classList.remove("invisible"));
-  }
-}
-
-async function start(size, interval) {
-  const viewer = new Viewer(size);
-  await viewer.load();
-
-  const timer = new Timer(interval);
-  const counter = document.querySelector("#counter");
-
-  let cursor = 0;
-
-  function next() {
-    timer.start();
-    viewer.switch(cursor);
-    counter.textContent = `${cursor + 1}/${viewer.images.length}`;
-  }
-
-  next();
-
-  document.addEventListener("timeup", (e) => {
-    if (cursor < viewer.images.length - 1) {
-      cursor += 1;
-      next();
-    } else {
-      const message = document.querySelector("#message");
-      message.textContent = "Finish";
-      viewer.showAll();
-    }
-  });
 }
 
 (() => {
-  document.querySelector("#startButton").addEventListener("click", (e) => {
-    const size = document.querySelector("#sizeInput").value;
-    const interval = document.querySelector("#intervalInput").value;
-    start(size, interval);
-    document.querySelector("#forms").remove();
-  });
+    const timer = new Timer();
+
+    let cursor = 0;
+    let size = null;
+    let interval = null;
+    let folder = null;
+
+    document.querySelector("#startButton").addEventListener("click", async (e) => {
+        document.querySelector("#title").style = "display:none";
+        document.querySelector("#forms").style = "display:none";
+        document.querySelector("#controls").style = "display:flex";
+
+        size = parseInt(document.querySelector("#sizeInput").value);
+        interval = parseInt(document.querySelector("#intervalInput").value);
+        folder = document.querySelector("#folderSelect").value;
+
+        await loadImages(size, folder);
+
+        timer.set(interval);
+        timer.start();
+
+        document.querySelector(`[id="${cursor}"]`).style = "display:block";
+        document.querySelector("#cursor").textContent = `${cursor + 1}/${size}`;
+    });
+
+    document.querySelector("#pauseButton").addEventListener("click", async (e) => {
+        timer.pause();
+    });
+
+    document.querySelector("#resumeButton").addEventListener("click", async (e) => {
+        timer.resume();
+    });
+
+    document.addEventListener("timeup", (e) => {
+        cursor += 1;
+
+        if (cursor < size) {
+            document.querySelector(`[id="${cursor - 1}"]`).style = "display:none";
+            document.querySelector(`[id="${cursor}"]`).style = "display:block";
+
+            document.querySelector("#cursor").textContent = `${cursor + 1}/${size}`;
+
+            timer.set(interval);
+            timer.start();
+        } else {
+            document.querySelectorAll("img").forEach((img) => (img.style = "display:block"));
+            document.querySelector("#time").style = "visibility: hidden";
+            document.querySelector("#cursor").textContent = "Finish!";
+            document.querySelector("#buttons").style = "visibility: hidden";
+        }
+    });
+
+    document.addEventListener("countdown", (e) => {
+        document.querySelector("#time").textContent = timer.time;
+    });
 })();

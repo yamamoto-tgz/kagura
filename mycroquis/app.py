@@ -6,20 +6,26 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 
 CROQUIS_DIR = "./mycroquis/static/img"
-CROQUIS_LEN = 5
-CROQUIS_INTERVAL_SECONDS = 180
+CROQUIS_SIZE = 5
+CROQUIS_INTERVAL = 180
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    folders = sorted(os.listdir(CROQUIS_DIR))
+    return render_template(
+        "index.html", size=CROQUIS_SIZE, interval=CROQUIS_INTERVAL, folders=folders
+    )
 
 
 @app.route("/api/images")
 def images():
     size = int(request.args.get("size"))
+    folder = request.args.get("folder")
 
-    filenames = [f"img/{filename}" for filename in os.listdir(CROQUIS_DIR)]
-    random.shuffle(filenames)
+    filenames = os.listdir(os.path.join(CROQUIS_DIR, folder))
+    paths = [f"/static/img/{folder}/{filename}" for filename in filenames]
 
-    return jsonify(filenames[:size])
+    random.shuffle(paths)
+
+    return jsonify(paths[:size])

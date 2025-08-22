@@ -5,18 +5,39 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
+    <div id="controls" style="display: none">
+      <div id="time"></div>
+      <div id="cursor"></div>
+      <div id="buttons">
+        <button id="pauseButton">pause</button>
+        <button id="resumeButton">resume</button>
+      </div>
+    </div>
+    <div id="title">My Croquis</div>
     <div id="forms">
-      <div>size: <input id="sizeInput" value="5" /></div>
-      <div>interval: <input id="intervalInput" value="120" /></div>
+      <table>
+        <tr>
+          <th>Size</th>
+          <td><input id="sizeInput" value="{{ size }}" /></td>
+        </tr>
+        <tr>
+          <th>Interval</th>
+          <td><input id="intervalInput" value="{{ interval }}" /></td>
+        </tr>
+        <tr>
+          <th>Folder</th>
+          <td>
+            <select id="folderSelect">
+              {% for folder in folders %}
+              <option value="{{ folder }}">{{ folder }}</option>
+              {% endfor %}
+            </select>
+          </td>
+        </tr>
+      </table>
       <button id="startButton">start</button>
     </div>
-
-    <div id="meta">
-      <div id="counter"></div>
-      <div id="timer"></div>
-    </div>
-    <div id="message"></div>
-    <div id="viewer"></div>
   </body>
+  <script src="{{ url_for('static', filename='timer.js') }}"></script>
   <script src="{{ url_for('static', filename='main.js') }}"></script>
 </html>
