@@ -3,6 +3,8 @@
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 PROJECT_DIR=$(dirname $SCRIPT_DIR)
 
-source $PROJECT_DIR/venv/bin/activate
+cd $PROJECT_DIR
 
-flask --app $PROJECT_DIR/kagura/app.py run --debug
+source ./venv/bin/activate
+
+flask --app ./kagura/app.py run --debug
