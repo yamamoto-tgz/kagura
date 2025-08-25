@@ -5,7 +5,7 @@ from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-CROQUIS_DIR = "./mycroquis/static/img"
+CROQUIS_DIR = "./kagura/static/img"
 CROQUIS_SIZE = 5
 CROQUIS_INTERVAL = 180
 

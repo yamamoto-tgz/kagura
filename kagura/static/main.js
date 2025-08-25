@@ -39,10 +39,14 @@ async function loadImages(size, folder) {
 
     document.querySelector("#pauseButton").addEventListener("click", async (e) => {
         timer.pause();
+        e.target.style = "display:none";
+        document.querySelector("#resumeButton").style = "display:inline";
     });
 
     document.querySelector("#resumeButton").addEventListener("click", async (e) => {
         timer.resume();
+        e.target.style = "display:none";
+        document.querySelector("#pauseButton").style = "display:inline";
     });
 
     document.addEventListener("timeup", (e) => {
@@ -59,7 +63,7 @@ async function loadImages(size, folder) {
         } else {
             document.querySelectorAll("img").forEach((img) => (img.style = "display:block"));
             document.querySelector("#time").style = "visibility: hidden";
-            document.querySelector("#cursor").textContent = "Finish!";
+            document.querySelector("#cursor").textContent = "お疲れ様!";
             document.querySelector("#buttons").style = "visibility: hidden";
         }
     });

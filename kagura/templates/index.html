@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MyCroquis</title>
+    <title>神楽</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <div id="controls" style="display: none">
+    <div id="controls">
       <div id="time"></div>
       <div id="cursor"></div>
       <div id="buttons">
-        <button id="pauseButton">pause</button>
-        <button id="resumeButton">resume</button>
+        <button id="pauseButton">一時停止</button>
+        <button id="resumeButton">再開</button>
       </div>
     </div>
-    <div id="title">My Croquis</div>
+    <div id="title">神楽</div>
     <div id="forms">
       <table>
         <tr>
@@ -35,7 +35,7 @@
           </td>
         </tr>
       </table>
-      <button id="startButton">start</button>
+      <button id="startButton">開始</button>
     </div>
   </body>
   <script src="{{ url_for('static', filename='timer.js') }}"></script>

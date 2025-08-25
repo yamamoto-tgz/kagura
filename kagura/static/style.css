@@ -2,9 +2,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: lightblue;
+  justify-content: center;
+  background-image: URL("background.jpg");
   margin: 0px;
   padding: 5px;
+  color: #555555;
 }
 
 body * {
@@ -15,6 +17,7 @@ div#controls {
   display: flex;
   width: 100%;
   padding: 5px;
+  display: none;
 }
 
 div#time {
@@ -35,8 +38,11 @@ div#buttons {
   text-align: right;
 }
 
+button#resumeButton {
+  display: none;
+}
+
 div#title {
-  color: mediumslateblue;
   font-size: 50px;
   font-weight: bold;
   padding: 15px;
@@ -47,7 +53,8 @@ div#forms {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  background-color: ghostwhite;
+  background-color: #ffffff;
+  border: outset;
   padding: 50px;
 }
 
@@ -58,4 +65,5 @@ select {
 
 img {
   max-height: 800px;
+  border: outset;
 }
