@@ -17,9 +17,12 @@ $ pip install -r requirements.txt
 ## Run
 
 ```
-$ mkdir ~/Pictures/kagura
-$ ln -s ~/Pictures/kagura ./kagura/static/img
+$ export KAGURA_DIR=$HOME/Pictures/kagura
 $ flask --app kagura/app.py run --debug
 ```
 
 and open http://localhost:5000
+
+## Environment Variables
+
+- KAGURA_DIR: 画像が保存されているディレクトリを指定

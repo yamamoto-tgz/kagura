@@ -1,11 +1,11 @@
 import os
 import random
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_from_directory
 
 app = Flask(__name__)
 
-KAGURA_DIR = "./kagura/static/img"
+KAGURA_DIR = os.getenv("KAGURA_DIR")
 KAGURA_SIZE = 5
 KAGURA_INTERVAL = 180
 
@@ -24,8 +24,13 @@ def images():
     folder = request.args.get("folder")
 
     filenames = os.listdir(os.path.join(KAGURA_DIR, folder))
-    paths = [f"/static/img/{folder}/{filename}" for filename in filenames]
+    paths = [f"/images/{folder}/{filename}" for filename in filenames]
 
     random.shuffle(paths)
 
     return jsonify(paths[:size])
+
+
+@app.route("/images/<path:filename>")
+def static_images(filename):
+    return send_from_directory(KAGURA_DIR, filename)
