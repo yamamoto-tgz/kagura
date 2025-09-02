@@ -7,4 +7,5 @@ cd $PROJECT_DIR
 
 source ./venv/bin/activate
 
+export KAGURA_DIR=$HOME/Pictures/kagura
 flask --app ./kagura/app.py run --debug
