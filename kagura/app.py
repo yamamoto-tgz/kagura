@@ -19,7 +19,7 @@ def index():
 
     roots = [root for root, _, _ in os.walk(KAGURA_DIR, followlinks=True)]
 
-    folders = [
+    directories = [
         re.sub(f"^{KAGURA_DIR}/", "", root) for root in roots if count_files(root) > 0
     ]
 
@@ -27,17 +27,17 @@ def index():
         "index.html",
         size=KAGURA_SIZE,
         interval=KAGURA_INTERVAL,
-        folders=sorted(folders),
+        directories=sorted(directories),
     )
 
 
 @app.route("/api/images")
 def images():
     size = int(request.args.get("size"))
-    folder = request.args.get("folder")
+    directory = request.args.get("directory")
 
-    filenames = os.listdir(os.path.join(KAGURA_DIR, folder))
-    paths = [f"/images/{folder}/{filename}" for filename in filenames]
+    filenames = os.listdir(os.path.join(KAGURA_DIR, directory))
+    paths = [f"/images/{directory}/{filename}" for filename in filenames]
 
     random.shuffle(paths)
 

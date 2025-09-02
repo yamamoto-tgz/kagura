@@ -1,5 +1,5 @@
-async function loadImages(size, folder) {
-    const res = await fetch(`/api/images?size=${size}&folder=${folder}`);
+async function loadImages(size, directory) {
+    const res = await fetch(`/api/images?size=${size}&directory=${directory}`);
     const paths = await res.json();
 
     for (let i = 0; i < paths.length; i++) {
@@ -17,7 +17,7 @@ async function loadImages(size, folder) {
     let cursor = 0;
     let size = null;
     let interval = null;
-    let folder = null;
+    let directory = null;
 
     document.querySelector("#startButton").addEventListener("click", async (e) => {
         document.querySelector("#title").style = "display:none";
@@ -26,9 +26,9 @@ async function loadImages(size, folder) {
 
         size = parseInt(document.querySelector("#sizeInput").value);
         interval = parseInt(document.querySelector("#intervalInput").value);
-        folder = document.querySelector("#folderSelect").value;
+        directory = document.querySelector("#directorySelect").value;
 
-        await loadImages(size, folder);
+        await loadImages(size, directory);
 
         timer.set(interval);
         timer.start();

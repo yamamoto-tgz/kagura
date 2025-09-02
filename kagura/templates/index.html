@@ -25,11 +25,11 @@
           <td><input id="intervalInput" value="{{ interval }}" /></td>
         </tr>
         <tr>
-          <th>Folder</th>
+          <th>Directory</th>
           <td>
-            <select id="folderSelect">
-              {% for folder in folders %}
-              <option value="{{ folder }}">{{ folder }}</option>
+            <select id="directorySelect">
+              {% for directory in directories %}
+              <option value="{{ directory }}">{{ directory }}</option>
               {% endfor %}
             </select>
           </td>
