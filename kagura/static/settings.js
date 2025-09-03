@@ -46,7 +46,7 @@
         const nameInput = document.querySelector("#nameInput");
 
         const data = {
-            name: nameInput.value,
+            name: nameInput.value == "" ? "無名" : nameInput.value,
             size: document.querySelector("#sizeInput").value,
             interval: document.querySelector("#intervalInput").value,
             directory: document.querySelector("#directorySelect").value,
