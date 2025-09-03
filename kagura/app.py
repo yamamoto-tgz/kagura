@@ -1,6 +1,7 @@
 import os
 import random
 import re
+import sqlite3
 
 from flask import Flask, jsonify, render_template, request, send_from_directory
 
@@ -9,6 +10,10 @@ app = Flask(__name__)
 KAGURA_DIR = os.getenv("KAGURA_DIR")
 KAGURA_SIZE = 5
 KAGURA_INTERVAL = 180
+
+
+def get_connection():
+    return sqlite3.connect("./kagura.db")
 
 
 @app.route("/")
@@ -48,3 +53,48 @@ def images():
 def static_images(filename):
     print(filename)
     return send_from_directory(KAGURA_DIR, filename)
+
+
+@app.route("/settings", methods=["POST"])
+def add_setting():
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute(
+            """
+                CREATE TABLE IF NOT EXISTS kagura (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    size INTEGER NOT NULL,
+                    interval INTEGER NOT NULL,
+                    directory INTEGER NOT NULL
+                )
+            """
+        )
+
+        data = request.get_json()
+
+        cur.execute(
+            "INSERT INTO kagura (name, size, interval, directory) VALUES (?, ?, ?, ?)",
+            (
+                data.get("name"),
+                data.get("size"),
+                data.get("interval"),
+                data.get("directory"),
+            ),
+        )
+    return str(cur.lastrowid), 201
+
+
+@app.route("/settings", methods=["GET"])
+def get_settings():
+    with get_connection() as conn:
+        rows = conn.cursor().execute("SELECT * FROM kagura").fetchall()
+        keys = ("id", "name", "size", "interval", "directory")
+        return jsonify([dict(zip(keys, row)) for row in rows])
+
+
+@app.route("/settings/<int:id>", methods=["DELETE"])
+def delete_setting(id):
+    with get_connection() as conn:
+        conn.cursor().execute("DELETE FROM kagura WHERE id = ?", (id,))
+        return "OK"

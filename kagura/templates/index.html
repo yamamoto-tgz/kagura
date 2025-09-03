@@ -36,8 +36,26 @@
         </tr>
       </table>
       <button id="startButton">開始</button>
+      <hr />
+      <div>名前をつけて設定を保存</div>
+      <div>
+        <input id="nameInput" />
+        <button id="saveButton">保存</button>
+      </div>
+      <table id="settingsTable">
+        <caption>
+          保存された設定
+        </caption>
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Interval</th>
+          <th>Directory</th>
+        </tr>
+      </table>
     </div>
   </body>
   <script src="{{ url_for('static', filename='timer.js') }}"></script>
   <script src="{{ url_for('static', filename='main.js') }}"></script>
+  <script src="{{ url_for('static', filename='settings.js') }}"></script>
 </html>

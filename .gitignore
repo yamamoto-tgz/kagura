@@ -4,3 +4,6 @@
 # python
 /venv
 __pycache__
+
+# kagura
+kagura.db

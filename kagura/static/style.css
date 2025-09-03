@@ -82,3 +82,21 @@ img {
   max-width: 100%;
   border: outset;
 }
+
+#settingsTable {
+  border: inset;
+}
+
+#settingsTable * {
+  padding: 5px;
+}
+
+td.name {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+hr {
+  width: 100%;
+}
