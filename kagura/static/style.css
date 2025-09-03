@@ -65,6 +65,10 @@ div#forms {
   padding: 50px;
 }
 
+div#forms th {
+  text-align: left;
+}
+
 button {
   background: #ffffff;
   border: outset;
@@ -91,10 +95,15 @@ img {
   padding: 5px;
 }
 
-td.name {
-  color: blue;
+#settingsTable td.name {
+  color: #63822d;
   text-decoration: underline;
   cursor: pointer;
+}
+
+#settingsTable th {
+  text-align: left;
+  background-color: #f4f4eb;
 }
 
 hr {
