@@ -16,6 +16,22 @@ def get_connection():
     return sqlite3.connect("./kagura.db")
 
 
+# Create table
+with get_connection() as conn:
+    cur = conn.cursor()
+    cur.execute(
+        """
+            CREATE TABLE IF NOT EXISTS kagura (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                size INTEGER NOT NULL,
+                interval INTEGER NOT NULL,
+                directory INTEGER NOT NULL
+            )
+        """
+    )
+
+
 @app.route("/")
 def index():
     def count_files(dir):
@@ -59,18 +75,6 @@ def static_images(filename):
 def add_setting():
     with get_connection() as conn:
         cur = conn.cursor()
-        cur.execute(
-            """
-                CREATE TABLE IF NOT EXISTS kagura (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    size INTEGER NOT NULL,
-                    interval INTEGER NOT NULL,
-                    directory INTEGER NOT NULL
-                )
-            """
-        )
-
         data = request.get_json()
 
         cur.execute(
