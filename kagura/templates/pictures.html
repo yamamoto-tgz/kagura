@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>神楽</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    </head>
+
+    <body>
+        <div id="controls">
+            <div id="time"></div>
+            <div id="cursor"></div>
+            <div id="buttons">
+                <button id="pauseButton">一時停止</button>
+                <button id="resumeButton">再開</button>
+            </div>
+        </div>
+        <div id="title">神楽</div>
+        <div id="forms">
+            <table>
+                <tr>
+                    <th>Size</th>
+                    <td><input id="sizeInput" value="{{ size }}" /></td>
+                </tr>
+                <tr>
+                    <th>Interval</th>
+                    <td><input id="intervalInput" value="{{ interval }}" /></td>
+                </tr>
+                <tr>
+                    <th>Directory</th>
+                    <td>
+                        <select id="directorySelect">
+                            {% for directory in directories %}
+                            <option value="{{ directory }}">{{ directory }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button id="startButton">開始</button>
+            <hr />
+            <div>名前をつけて設定を保存</div>
+            <div>
+                <input id="nameInput" />
+                <button id="saveButton">保存</button>
+            </div>
+            <table id="settingsTable">
+                <caption>
+                    保存された設定
+                </caption>
+                <tr>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Interval</th>
+                    <th>Directory</th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script src="{{ url_for('static', filename='pictures/timer.js') }}"></script>
+    <script src="{{ url_for('static', filename='pictures/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='pictures/settings.js') }}"></script>
+</html>

@@ -109,3 +109,8 @@ img {
 hr {
   width: 100%;
 }
+
+iframe#sketchfab {
+  width: 80%;
+  height: 80vh;
+}

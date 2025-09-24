@@ -34,18 +34,26 @@ with get_connection() as conn:
 
 @app.route("/")
 def index():
+    return render_template("index.html")
+
+
+@app.route("/models")
+def models():
+    return render_template("models.html")
+
+
+@app.route("/pictures")
+def pictures():
     def count_files(dir):
         paths = [os.path.join(dir, filename) for filename in os.listdir(dir)]
         return sum([os.path.isfile(path) for path in paths])
 
     roots = [root for root, _, _ in os.walk(KAGURA_DIR, followlinks=True)]
 
-    directories = [
-        re.sub(f"^{KAGURA_DIR}/", "", root) for root in roots if count_files(root) > 0
-    ]
+    directories = [re.sub(f"^{KAGURA_DIR}/", "", root) for root in roots if count_files(root) > 0]
 
     return render_template(
-        "index.html",
+        "pictures.html",
         size=KAGURA_SIZE,
         interval=KAGURA_INTERVAL,
         directories=sorted(directories),

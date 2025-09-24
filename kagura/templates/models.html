@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>神楽</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+    </head>
+
+    <body>
+        <iframe
+            src=""
+            id="sketchfab"
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share
+            allowfullscreen
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"
+        ></iframe>
+
+        <button id="randomButton">ランダム回転</button>
+
+        <div>
+            <span>x</span><input id="xInput"/ > <span>y</span><input id="yInput" />
+            <button id="moveButton">手動回転</button>
+        </div>
+
+        <script src="{{ url_for('static', filename='models/main.js') }}"></script>
+    </body>
+</html>
