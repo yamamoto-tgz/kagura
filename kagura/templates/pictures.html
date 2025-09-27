@@ -2,10 +2,12 @@
 <html>
     <head>
         <title>神楽</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='base/style.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='pictures/style.css') }}" />
     </head>
 
     <body>
+        <h1 id="title">神楽</h1>
         <div id="controls">
             <div id="time"></div>
             <div id="cursor"></div>
@@ -14,7 +16,6 @@
                 <button id="resumeButton">再開</button>
             </div>
         </div>
-        <div id="title">神楽</div>
         <div id="forms">
             <table>
                 <tr>

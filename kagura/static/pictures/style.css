@@ -1,0 +1,82 @@
+div#controls {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    display: none;
+}
+
+div#time {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+div#cursor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+div#buttons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+button#resumeButton {
+    display: none;
+}
+
+div#forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #ffffff;
+    border: outset;
+    padding: 50px;
+}
+
+div#forms th {
+    text-align: left;
+}
+
+select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-height: 90vh;
+    max-width: 100%;
+    border: outset;
+}
+
+#settingsTable {
+    border: inset;
+}
+
+#settingsTable * {
+    padding: 5px;
+}
+
+#settingsTable td.name {
+    color: #63822d;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#settingsTable th {
+    text-align: left;
+    background-color: #f4f4eb;
+}
+
+hr {
+    width: 100%;
+}

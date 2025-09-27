@@ -29,9 +29,9 @@ class Camera {
 (() => {
     const client = new Sketchfab('1.12.1', document.querySelector('#sketchfab'));
 
-    const uid = '10214a08ab13435693e0dfbecea2e12f';
-    const position = [0.07, -5.34, -0.04];
-    const target = [-0.02, -0.32, -0.25];
+    const uid = 'b79f0e54a7eb48afaa1b33db6d11f971';
+    const position = [0.0, -1.0, 0.0];
+    const target = [0.0, 0.0, 0.15];
 
     client.init(uid, {
         success: (api) => {
